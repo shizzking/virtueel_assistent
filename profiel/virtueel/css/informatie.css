@@ -1,0 +1,57 @@
+#information_box_1{
+    max-width: 90%;
+}
+#informatie_image_1{
+    height: 200px;
+    width: 100%;
+    background-color: #589fc6;
+}
+/* @group profile (left_under)*/
+#informatie_tekst_1 .gcontent { display: block; margin-bottom: 20px;}
+#informatie_tekst_1 .gcontent .informatie_head { background: #589fc6; border: 1px solid #3e82a7; padding-left: 8px; }
+#informatie_tekst_1 .gcontent .informatie_head h1 { color: #fafcfd; font-weight: bold; font-size: 17px; }
+
+#informatie_tekst_1 .gcontent .boxy { border-radius: 0px 0px 5px 5px; border: 1px solid #ccc; border-top: 0px; padding: 10px 8px; background: #f9f9f9; }
+#informatie_tekst_1 .gcontent .profile { font-size: 15px;}
+
+p.informatie_tekst{
+    font-size: 15.5px;
+}
+
+
+
+@media screen and (max-width: 956px){
+    #informatie_tekst_1{
+        width: 80%;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    nav { 
+        height: auto;
+    }
+    nav ul {
+        width: 100%;
+        display: block;
+        height: auto;
+    }
+    nav li {
+        width: 50%;
+        float: left;
+        position: relative;
+    }
+    nav li a {
+        border-bottom: 1px solid #576979;
+        border-right: 1px solid #576979;
+    }
+    nav a {
+        text-align: left;
+        width: 100%;
+        text-indent: 25px;
+    }
+    
+    nav li sel{
+        width: 50%;
+    }
+}
