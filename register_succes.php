@@ -70,7 +70,7 @@ if(isset($_POST['submit']))
         $query = mysqli_query($db, "INSERT INTO users (username, password, email) VALUES ('$username', '$enc_password', '$email')") or die(mysqli_error($db));
         if($query) {
             echo "Thank You! you are now registered.";     
-            header( "refresh:4;url=home.php" );
+            header( "refresh:4;url=index.php" );
         }
     } 
 }

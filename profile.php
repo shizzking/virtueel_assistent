@@ -37,6 +37,7 @@
             <div class="gcontent">
                 <div class="head"><h1>Profiel aanpassen</h1></div>
                 <div class="boxy">
+                    <p> Pas hier uw gegevens aan </p>
                     <form action="change_profile.php" method="POST">
                         <table border="0" class="profile">
                             <tr><td>Voornaam: </td><td><input value="<?php echo $row['firstname'] != '' ? $row['firstname'] : ''; ?>" type="text" name="firstname" autofocus/></td></tr>
@@ -44,6 +45,7 @@
                             <tr><td>Functie: </td><td><input value="<?php echo $row['function'] != '' ? $row['function'] : ''; ?>" type="text" name="function"/></td></tr> 
                             <tr><td>Mobiel: </td><td><input value="<?php echo $row['mob_tel'] != '' ? $row['mob_tel'] : ''; ?>" type="number" name="mob_tel" maxlength="10"/></td></tr> 
                             <tr><td>Telefoon: </td><td><input value="<?php echo $row['vast_tel'] != '' ? $row['vast_tel'] : ''; ?>" type="number" name="vast_tel" maxlength="10"/></td></tr> 
+                            <tr></tr>
                             <tr><td></td><td><input type="submit"></td></tr> 
                         </table>
                     </form>
@@ -52,7 +54,16 @@
         </section>                
 
     </section>
-
+    <?php 
+        
+        if(isset($_GET['id'])){
+            $user_id = $_GET['id'];
+        }
+        else{
+            $user_id = '';
+        }
+    ?>
+    
     <section id="middle">
         <div id="userStats" class="clearfix">
             <div class="pic">
@@ -60,7 +71,7 @@
             </div>
 
             <div class="data">
-                <h1>Naam: <?php if (isset($_SESSION['user'])) {echo ucwords($row["company_name"]);} ?></h1>
+                <h1>Naam: <?php // if (isset($_SESSION['user'])) {echo ucwords($row["company_name"]);} ?></h1>
                 <h3>Rol: binnen in het bedrijf</h3>
                 <h4><a href="#">Websitenaam</a></h4>
                 <div class="sep"></div>
@@ -71,36 +82,45 @@
                 </ul>
             </div>
         </div>
-
-
-        <section id="space"></section> 
-
-        <section id="right">                            
-            <div class="gcontent">
-                <div class="head"><h1>Gekoppelde accounts</h1></div>
-                <div class="boxy">
-                    <p>Collega's - 00 totaal</p>
-
-                    <div class="friendslist clearfix">
-                        <div class="friend">
-                            <a href="#"><img src="img/friend_avatar_default.jpg" width="30" height="30" alt="Jerry K." /></a><span class="friendly"><a href="#">Jerry K.</a></span>
-                        </div>
-
-                        <div class="friend">
-                            <a href="#"><img src="img/friend_avatar_default.jpg" width="30" height="30" alt="Katie F." /></a><span class="friendly"><a href="#">Katie F.</a></span>
-                        </div>
-
-                        <div class="friend">
-                            <a href="#"><img src="img/friend_avatar_default.jpg" width="30" height="30" alt="Ash K." /></a><span class="friendly"><a href="#">Ash K.</a></span>
-                        </div>
-                    </div>
-
-                    <span><a href="#">See all...</a></span>
-                </div>
+        
+        <style>
+            .company{
+                font-size: 12.5px; 
+                
+            }
+     
+        </style>
+        
+    <section id="space"></section> 
+    <section id="right">                            
+        <div class="gcontent">
+            <div class="head"><h1>Bedrijfs gegevens</h1></div>
+            <div class="boxy">
+                <?php
+                   
+                    $sql = "SELECT * FROM users LEFT JOIN company ON users.company_id = company.company_id WHERE user_id =  . $user_id ";
+                    $result_info = mysqli_query($db, $sql) or die(mysqli_error($db)); // voert de query uit
+                    $row_2 = mysqli_fetch_array($result_info, MYSQLI_ASSOC); // Zet het om naar een array
+                    
+                        echo $row_2;
+                ?>
+<!--                <p>Voeg hier uw bedrijfsgegevens toe!</p>
+                    <form action="change_company.php" method="POST">
+                        <table border="0" class="company">
+                            <tr><td>Bedrijfsnaam: </td><td><input value="" type="text" name="name" autofocus/></td></tr>
+                            <tr><td>Omschrijving: </td><td><input value="" type="text" name="description"/></td></tr> 
+                            <tr><td>Website: </td><td><input value="" type="text" name="website"/></td></tr> 
+                            <tr><td>Email: </td><td><input value="" type="text" name="email" maxlength="10"/></td></tr> 
+                            <tr><td>Street: </td><td><input value="" type="text" name="street" maxlength="10"/></td></tr> 
+                            <tr><td>Postcode: </td><td><input value="" type="text" name="zip" maxlength="6"/></td></tr> 
+                            <tr class="tr"><td>KVK nummer: </td><td><input value="" type="number" name="kvkNumber" maxlength="8"/></td></tr> 
+                            <tr><td>BTW nummer: </td><td><input value="" type="text" name="btwNumber" maxlength="14"/></td></tr> 
+                            <tr></tr>
+                            <tr><td></td><td><input type="submit"></td></tr> 
+                        </table>
+                    </form>-->
             </div>
-        </section>
+        </div>
+    </section>
 
     </section>
-<?php
-include_once 'footer.php';
-?>

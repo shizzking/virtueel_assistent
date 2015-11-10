@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("config.php");
                 <li class="nav_elem"><?php if(isset($_SESSION['user'])){ echo'<a href="profile.php">Profiel</a>';} ?></li>
                 <li class="nav_elem"><a href="informatie.php">Informatie</a></li>
                 <li class="nav_elem"><a href="dienst.php">Dienst</a></li>
-                <li class="nav_elem"><a href="#">Contact</a></li>
+                <li class="nav_elem"><a href="contact.php">Contact</a></li>
             </ul>
             <?php if(isset($_SESSION['user'])): ?>
                 <p id='username'><?php echo ucwords($_SESSION['user']->username); ?></p>

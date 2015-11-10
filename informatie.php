@@ -20,12 +20,4 @@ include_once 'header.php';
     <div id="informatie_image_1"></div>
 
 </div>
-
-</div>
-
-
-
-<?php
-include_once 'footer.php';
-?>
-            
+           
