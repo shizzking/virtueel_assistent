@@ -26,6 +26,7 @@ include_once 'config.php';
                         die("Connection failed: " . $db->connect_error);
                     }
                         $sql = "SELECT company_id, name, description FROM company";
+                        $sql_categorie = "SELECT * FROM users LEFT JOIN company ON users.company_id = company.company_id WHERE user_id = '$id'";
                         $result = $db->query($sql);
 
                     if ($result->num_rows > 0) {
