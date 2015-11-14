@@ -1,54 +1,39 @@
 <?php
 include_once 'config.php';
+include_once 'header.php';
 ?>
+<link href="informatie_dienst.css" rel="stylesheet" type="text/css"/>
 
-<style>
-    table{
-        margin: 25px;
-        
-    }
-    
-    table > td.op{
-        font-size: 20px
-    }
-</style>
-<div id="content" class="clearfix">
 
-<div id="search"> <input type="text" class="search" placeholder="Zoekt u iets?"></div>    
+
+<!--<div id="search"> <input type="text" class="search" placeholder="Zoekt u iets?"></div>    -->
 <div id="fit">        
-    <section id="dienst_box_1">                            
+    <section id="dienst_box">                            
         <div class="gcontent">
-            <div class="dienst_optie_1"><h1>Categorieën</h1></div>
+            <div class="dienst_head"><h1>Categorieën</h1></div>
                 <div class="boxy">
                 <?php                        
                     // Check connection
                     if ($db->connect_error) {
                         die("Connection failed: " . $db->connect_error);
                     }
-                        $sql = "SELECT company_id, name, description FROM company";
-                        $query = "SELECT * FROM company LEFT JOIN diensten on categorie_ID = diensten.ID";
-//                        $sql_c = "SELECT * FROM users LEFT JOIN company ON users.company_id = company.company_id WHERE user_id = '$id'";
-                        $result_2 = $db->query($query);
-                        $result = $db->query($sql);
+                    $sql = "SELECT company_id, companyName, description, website, email, street, zipcode, phone, kvkNumber, btwNumber, avatar, categorie FROM company";
+                    $result = $db->query($sql);
 
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
-                            echo "<table border=1>";
-                            echo "<tr><td>ID: </td><td>" . $row["company_id"]. "</td></tr>";
-                            echo "<tr><td>Name: </td><td>" . $row["name"]. "</td></tr>";
-                            echo "<tr><td>Description: </td><td>" . $row["description"]. "</td></tr>";
-                            echo "<tr><td>Sector: </td><td></td></tr>";
+                            echo "<table border='1' class='categorie'>";
+                            echo "<tr><td class='catrow'>Name: </td><td class='catrowB'>" . ucwords($row["companyName"]). "</td></tr>";
+                            echo "<tr><td class='catrow'>Website: </td><td class='catrowB'>" . $row["website"] . "</td></tr>";
+                            echo "<tr><td class='catrow'>Sector: </td><td class='catrowB'>" . $row["categorie"] . "</td></tr>";
+                            echo "<form action='overview.php' method='POST'>";
+                            echo "<tr><td colspan='2' class='tableElementCenterdOut'><input hidden value=". $row['company_id'] . " name='id'><input class='moreInfo' value='Toon meer informatie' type='submit'></td></tr>";
+                            echo "</form>";
                             echo "</table>";
                         }
                     } else {
                         echo "0 results";
-                    }
-                    
-                    if($result_2->num_rows> 0){
-                        while ($row_2 = $result_2->fetch_assoc()){
-                            echo $row_2['sector'];
-                    }
                     }
                     $db -> close();
                 ?>    

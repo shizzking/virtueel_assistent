@@ -23,6 +23,5 @@ if(isset($_POST)) {
         header('Location:'.$_SERVER['HTTP_REFERER']);
     }
     else {
-        echo '<p style="font-size: 300pt;">Fail!!!</p>';
-    }
+    return false;}
 }

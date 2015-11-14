@@ -3,7 +3,7 @@ include_once 'config.php';
 include_once 'authorized.php';
 
 if(sizeof($_POST) > 0 ){
-    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $companyName = mysqli_real_escape_string($db, $_POST['companyName']);
     $description = mysqli_real_escape_string($db, $_POST['description']);
     $website = mysqli_real_escape_string($db, $_POST['website']);
     $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -13,21 +13,14 @@ if(sizeof($_POST) > 0 ){
     $kvkNumber = mysqli_real_escape_string($db, $_POST['kvkNumber']);
     $btwNumber = mysqli_real_escape_string($db, $_POST['btwNumber']);
     $id = $_SESSION["user"]->id;
-    
-    
-    $sql_c = "SELECT * FROM users LEFT JOIN company ON users.company_id = company.company_id WHERE user_id = '$id'";
-//  $update_company = "SELECT company SET name = '$name', description = '$description', website = '$website', email = '$email', street = '$street', zip = '$zipcode', phone = '$phone', kvkNumber = '$kvkNumber', btwNumber = '$btwNumber'";
-
+   
     // Zet de nieuwe gegvens in de database
- 
+    $updateCompany = "UPDATE company SET companyName = '$companyName', description = '$description', website = '$website', email = '$email', street = '$street', zipcode = '$zipcode', phone = '$phone', kvkNumber = '$kvkNumber', btwNumber = '$btwNumber' WHERE company_id = " . $id; 
     // Slaat de gegevens op in de database
-    $result = mysqli_query($db,$sql_c) or die(mysqli_error($db));
-    if($result){
-        echo "Uw gegevens zijn geupdate";
-        header("refresh:4;url=profile.php");
-    }
-    
-    
+    $resultCompany_2 = mysqli_query($db,$updateCompany) or die(mysqli_error($db));
+        
+        if($resultCompany_2){
+            echo "Uw gegevens zijn geupdate";
+            header("refresh:4;url=profile.php");
+        }
 }
-
-
